@@ -30,6 +30,17 @@ class Contacts extends Component {
     };
   }
 
+  deleteContact = (id)  =>  { //propogating up to the parent component
+    const { contacts } = this.state;
+    
+    const newContacts = contacts.filter(contact => 
+      contact.id !== id);
+
+    this.setState({
+      contacts: newContacts
+    });  
+  };
+
   render() {
     const { contacts } = this.state; //destructuring using curly braces
 
@@ -42,6 +53,7 @@ class Contacts extends Component {
           <Contact
             key={contact.id} //again, react likes id's
             contact={contact} //whats being rendered
+            deleteClickHandler={this.deleteContact.bind(this, contact.id)}
           />
         ))}
       </React.Fragment>
