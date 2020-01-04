@@ -9,7 +9,13 @@ const reducer = (state, action) => {
         ...state,
         contacts: state.contacts.filter(contact =>  
         contact.id !== action.payload) //payload is data you want to send along with your action
-      }
+      };
+      
+    case 'ADD_CONTACT':
+      return {
+        ...state,
+        contacts: [action.payload, ...state.contacts]
+      };
       default: 
         return state;
   }

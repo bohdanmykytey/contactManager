@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Contact from "./Contact";
-import { Consumer } from "../context";
+import Contact from '../contacts/Contact';
+import { Consumer } from "../../context";
 
 //class based component becasue it hasd state
 class Contacts extends Component {
