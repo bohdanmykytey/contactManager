@@ -28,7 +28,6 @@ class Contacts extends Component {
                 <Contact
                   key={contact.id} //again, react likes id's
                   contact={contact} //whats being rendered
-                  deleteClickHandler={this.deleteContact.bind(this, contact.id)}
                 />
               ))}
             </React.Fragment>
