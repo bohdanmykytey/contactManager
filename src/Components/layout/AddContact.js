@@ -54,6 +54,7 @@ class AddContact extends Component {
       phone: '',
       errors: {}
     });
+    this.props.history.push('/') //returns back to the home page once form is submitted
   };
 
   render() {

@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "./context";
 import AddContact from './Components/layout/AddContact'
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
+import NotFound from './Components/pages/NotFound'
 
 class App extends Component {
   render() {
@@ -20,6 +20,8 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Contacts} />
               <Route exact path='/about' component={About} />
+              <Route exact path='/contact/add' component={AddContact} />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </div>
