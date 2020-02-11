@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios'
 
 const Context = React.createContext();
 
@@ -25,29 +26,24 @@ export class Provider extends Component {
   state = {
     contacts: [
       //state that holds a key of contacts as an array
-      {
-        id: 1, //react likes id's
-        name: "John Doe",
-        email: "jdoe@gmail.com",
-        phone: "555-123-4567"
-      },
-      {
-        id: 2,
-        name: "Karen Williams",
-        email: "kwills@gmail.com",
-        phone: "555-321-7654"
-      },
-      {
-        id: 3,
-        name: "Mike Smith",
-        email: "msmith@gmail.com",
-        phone: "555-132-4576"
-      }
+
     ],
     dispatch: action => {
       this.setState(state => reducer(state, action))
     }
   };
+
+  //fetching contacts from an API
+  async componentDidMount() {
+    const res = await axios.get('https://jsonplaceholder.typicode.com/users')
+    
+    this.setState({
+      contacts: res.data
+    })
+  }
+
+
+
 
   render()  {
       return(

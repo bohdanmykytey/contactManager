@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Consumer } from '../../context' 
+import { Consumer } from "../../context";
+import axios from "axios";
 
 class Contact extends Component {
   constructor() {
@@ -25,8 +26,13 @@ class Contact extends Component {
     );
   };
 
-  onDeleteClick = (id, dispatch) => {
-    dispatch({type: 'DELETE_CONTACT', payload: id});
+  //delete ruquest
+  onDeleteClick = async (id, dispatch) => {
+    await axios.delete(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    );
+
+    dispatch({ type: 'DELETE_CONTACT', payload: id })
   };
 
   render() {
@@ -39,27 +45,27 @@ class Contact extends Component {
           const { dispatch } = value;
           return (
             <div className="card card-body mb-3">
-            <h4>
-              {name}{" "}
-              <i
-                onClick={this.onShowClick}
-                className="fas fa-sort-down"
-                style={{ cursor: "pointer" }}
-              />
-              <i
-                className="fas fa-times"
-                style={{ cursor: "pointer", float: "right", color: "red" }}
-                onClick={this.onDeleteClick.bind(this, id, dispatch)}
-              />
-            </h4>
-            {showContactInfo ? ( //terinary operator for toggling showContactInfo()
-              <ul className="list-group">
-                <li className="list-group-item">{email}</li>
-                <li className="list-group-item">{phone}</li>
-              </ul>
-            ) : null}
-          </div>
-          )
+              <h4>
+                {name}{" "}
+                <i
+                  onClick={this.onShowClick}
+                  className="fas fa-sort-down"
+                  style={{ cursor: "pointer" }}
+                />
+                <i
+                  className="fas fa-times"
+                  style={{ cursor: "pointer", float: "right", color: "red" }}
+                  onClick={this.onDeleteClick.bind(this, id, dispatch)}
+                />
+              </h4>
+              {showContactInfo ? ( //terinary operator for toggling showContactInfo()
+                <ul className="list-group">
+                  <li className="list-group-item">{email}</li>
+                  <li className="list-group-item">{phone}</li>
+                </ul>
+              ) : null}
+            </div>
+          );
         }}
       </Consumer>
     );
@@ -67,7 +73,7 @@ class Contact extends Component {
 }
 
 Contact.propTypes = {
-  contact: PropTypes.object.isRequired,
+  contact: PropTypes.object.isRequired
 };
 
 export default Contact;
